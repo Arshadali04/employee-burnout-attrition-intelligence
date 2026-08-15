@@ -620,7 +620,7 @@ Contributions, issues, and feature requests are welcome.
 |----------|------|
 | 🐙 **GitHub** | [github.com/Arshadali04](https://github.com/Arshadali04) |
 | 💼 **LinkedIn** | [linkedin.com/in/arshadali4](https://linkedin.com/in/arshadali4) |
-| 🌐 **Portfolio** | [arshadali04-portfolio.netlify.app](https://arshadali04-portfolio.netlify.app/) |
+| 🌐 **Portfolio** | [arshadali04-portfolio](https://arshadaliathani.vercel.app/) |
 | 📧 **Email** | [arshadalia2703@gmail.com](mailto:arshadalia2703@gmail.com) |
 
 <br/>
