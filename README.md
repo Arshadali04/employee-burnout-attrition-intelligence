@@ -118,7 +118,7 @@ Without a consolidated, multi-dimensional view, HR teams are left reacting to de
 
 | Column | Description |
 |---|---|
-| `Booking_ID` → `EmployeeID` | Unique employee reference |
+| `EmployeeID` | Unique employee reference |
 | `Attrition` | Whether the employee left — Yes / No (target variable) |
 | `MonthlyIncome` | Monthly compensation in USD (1,009–19,999) |
 | `OverTime` | Whether the employee works overtime — Yes / No |
@@ -352,11 +352,13 @@ Where:
 
 | Model | CV AUC (5-fold) | Test AUC | Test F1 (Left) |
 |---|---|---|---|
-| Logistic Regression | See NB 09 | See NB 09 | See NB 09 |
-| Random Forest (all features) | See NB 09 | See NB 09 | See NB 09 |
-| **RF — Real Variables Only** | **See NB 09** | **See NB 09 ← honest benchmark** | **See NB 09** |
+| Logistic Regression | 0.821 | 0.835 | 0.500 |
+| Random Forest (all features) | 0.812 | 0.817 | 0.519 |
+| **RF — Real Variables Only** | **0.791** | **0.778 ← honest benchmark** | **0.482** |
 
-> Run `notebooks/09_predictive_modeling.ipynb` for exact AUC values — they are computed from the actual data rather than hardcoded in documentation.
+> **Synthetic variable inflation: 3.9 AUC points** (0.817 full model vs 0.778 real-only). The 0.778 figure is the defensible number to quote to stakeholders — everything above it is signal from variables that were generated using `Attrition` as an input.
+>
+> Full confusion matrices, ROC curves, and feature importance charts in `notebooks/09_predictive_modeling.ipynb`.
 
 ---
 
@@ -580,18 +582,13 @@ Yes — the notebooks use standard column names that can be mapped to your HRIS 
 MySQL 8.0+ syntax — uses ENUM types, InnoDB engine, window functions (`RANK() OVER`, `NTILE()`, `LAG()`, `LEAD()`, `PERCENT_RANK()`), and CTEs. Compatible with MariaDB 10.2+ with minor adjustments.
 </details>
 
-<details>
-<summary><strong>Why does the predictive model report say "See NB 09" instead of quoting AUC values?</strong></summary>
-AUC values are computed from the actual dataset at run time — hardcoding them in documentation would go stale as soon as the dataset or model is updated. Open <code>notebooks/09_predictive_modeling.ipynb</code> (outputs are pre-embedded) to see the current figures.
-</details>
-
 ---
 
 ## 🚀 Future Improvements
 
 - Deploy real employee pulse-survey data to validate the four synthetic-variable findings (workload, manager support, compensation satisfaction, career growth perception)
 - Add **XGBoost / GradientBoosting** to the predictive model comparison in Notebook 09
-- Integrate **SHAP values** for per-employee risk explanations (`shap` is already in requirements.txt)
+- Extend Notebook 09 with **SHAP values** for per-employee risk explanations (dependency already in `requirements.txt`)
 - Build a **longitudinal version** with time-series attrition data to measure trend velocity, not just snapshot levels
 - Add an **attrition cost model** — replacement cost per segment × headcount × probability, giving Finance a dollar figure for the intervention ROI
 - Automate the **Tableau refresh** via Tableau Server / Tableau Public publishing
@@ -638,7 +635,7 @@ Contributions, issues, and feature requests are welcome.
 
 **Arshadali Athani**
 **Role:** Computer Science Engineering Student
-**Interests:** Data Analytics, Data Engineering, Data Science
+**Interests:** Data Analytics, Data Engineering, Data Science, Software Development
 
 ---
 
